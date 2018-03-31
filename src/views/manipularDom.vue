@@ -104,11 +104,8 @@ export default {
     },
 
     removeTask (index) {
-      console.log('antes', this.task)
       this.task.splice(index)
-      console.log('despues', this.task)
-
-      return
+      this.totalTime()
     }
   }
 }
