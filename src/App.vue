@@ -35,6 +35,12 @@ export default {
       }
       return
     }
+  },
+
+  watch: {
+    name (newValue, oldValue) {
+      console.log(oldValue, newValue)
+    }
   }
 }
 </script>
