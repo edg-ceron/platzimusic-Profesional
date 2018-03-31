@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <section class="section">
       <nav class="nav has-shadow">
         <div class="columns is-gapless is-mobile">
@@ -31,11 +32,20 @@
       <ManipulacionDom />
     </section>
 
+    <section class="section">
+      <Reactividad />
+    </section>
+    <Footer />
   </div>
 </template>
 
 <script>
 import ManipulacionDom from './views/manipularDom'
+import Footer from './components/layout/footer'
+import Header from './components/layout/header'
+
+import Reactividad from './practicas/reactividad'
+
 import trackService from './services/track'
 
 const tracks = [
@@ -46,6 +56,9 @@ export default {
 
   components: {
     ManipulacionDom,
+    Footer,
+    Header,
+    Reactividad
   },
 
   data () {
