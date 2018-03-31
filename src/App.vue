@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    Hola mundo
+    <h1>{{msg}}</h1>
   </div>
 </template>
 
@@ -10,11 +10,12 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Hola mundo'
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import './scss/main.scss'
 </style>
