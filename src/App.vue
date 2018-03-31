@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{msg}}</h1>
+    <input type="text" v-model="name">
+    <p>{{name}}</p>
+
+    <a :href="url"> Link</a>
   </div>
 </template>
 
@@ -10,7 +12,8 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Hola mundo'
+      name: '',
+      url: 'google.com'
     }
   }
 }
