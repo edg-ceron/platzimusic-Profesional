@@ -8,6 +8,9 @@
     <h1>Fecha de nacimiento</h1>
     <input type="date" v-model="birthday">
     <p>{{age}}</p>
+
+    <button @click="format">Format</button>
+    <p>{{formattedName}}</p>
   </div>
 </template>
 
@@ -19,7 +22,8 @@ export default {
       name: '',
       lastName: '',
       url: 'google.com',
-      birthday: ''
+      birthday: '',
+      formattedName: ''
     }
   },
 
@@ -40,6 +44,12 @@ export default {
   watch: {
     name (newValue, oldValue) {
       console.log(oldValue, newValue)
+    }
+  },
+
+  methods: {
+    format () {
+      this.formattedName = this.name.split(' ').join('-').toUpperCase()
     }
   }
 }
