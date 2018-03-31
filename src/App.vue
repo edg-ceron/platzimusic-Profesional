@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <input type="text" v-model="name">
-    <p>{{name}}</p>
+    <h1>Escribe tu nombre:</h1>
+    <input type="text" v-model="name" placeholder="Nombre">
+    <input type="text" v-model="lastName" placeholder="Apellido">
+    <p>{{fullName}}</p>
 
-    <a :href="url"> Link</a>
+    <h1>Fecha de nacimiento</h1>
+    <input type="date" v-model="birthday">
+    <p>{{age}}</p>
   </div>
 </template>
 
@@ -13,7 +17,23 @@ export default {
   data () {
     return {
       name: '',
-      url: 'google.com'
+      lastName: '',
+      url: 'google.com',
+      birthday: ''
+    }
+  },
+
+  computed: {
+    fullName () {
+      return `${this.name} ${this.lastName}`
+    },
+    age () {
+      if (this.birthday) {
+        const today = new Date()
+        const birthday = new Date(this.birthday)
+        return today.getFullYear() - birthday.getFullYear()
+      }
+      return
     }
   }
 }
