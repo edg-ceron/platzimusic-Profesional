@@ -1,55 +1,62 @@
 <template>
   <div id="app">
-    <h1>Escribe tu nombre:</h1>
-    <input type="text" v-model="name" placeholder="Nombre">
-    <input type="text" v-model="lastName" placeholder="Apellido">
-    <p>{{fullName}}</p>
+    <section class="section">
+      <div class="column">
+        <nav class="nav has-shadow">
+          <div class="columns is-gapless is-mobile">
+            <div class="column is-9">
+              <input
+                v-model="searchQuery"
+                class="input is-large"
+                type="text"
+                placeholder="Buscar canciones"
+              >
+            </div>
+            <div class="column">
+              <a @click="search" class="button is-info is-large">Buscar</a>
+            </div>
+            <div class="column">
+              <a class="button is-danger is-large"> &times</a>
+            </div>
+          </div>
+        </nav>
+        <small class="has-text-grey-lighter">{{searchMessage}}</small>
+      </div>
 
-    <h1>Fecha de nacimiento</h1>
-    <input type="date" v-model="birthday">
-    <p>{{age}}</p>
-
-    <button @click="format">Format</button>
-    <p>{{formattedName}}</p>
+      <div class="column">
+        <div v-for="t in tracks">
+          {{t.name}} - {{t.artist}}
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+const tracks = [
+  {name: 'Trafic', artist: 'Tiesto'},
+  {name: 'Zocalo', artist: 'Armin van buuren'},
+  {name: 'For an angels', artist: 'Paul van dyk'},
+  {name: 'How do i know', artist: 'Andrew rayel'},
+]
 export default {
   name: 'app',
   data () {
     return {
-      name: '',
-      lastName: '',
-      url: 'google.com',
-      birthday: '',
-      formattedName: ''
+      searchQuery: '',
+      tracks: []
     }
   },
 
   computed: {
-    fullName () {
-      return `${this.name} ${this.lastName}`
-    },
-    age () {
-      if (this.birthday) {
-        const today = new Date()
-        const birthday = new Date(this.birthday)
-        return today.getFullYear() - birthday.getFullYear()
-      }
-      return
-    }
-  },
-
-  watch: {
-    name (newValue, oldValue) {
-      console.log(oldValue, newValue)
+    searchMessage () {
+      return ` Entrados: ${this.tracks.length}`
     }
   },
 
   methods: {
-    format () {
-      this.formattedName = this.name.split(' ').join('-').toUpperCase()
+    search () {
+      return this.tracks = tracks
     }
   }
 }
