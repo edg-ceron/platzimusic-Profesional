@@ -22,7 +22,7 @@
       <small class="has-text-grey-lighter">{{searchMessage}}</small>
       <div class="column">
         <div v-for="t in tracks">
-          {{t.name}} - {{t.artist}}
+          {{t.name}} - {{t.artists[0].name}}
         </div>
       </div>
     </section>
@@ -36,12 +36,10 @@
 
 <script>
 import ManipulacionDom from './views/manipularDom'
+import trackService from './services/track'
 
 const tracks = [
-  {name: 'Trafic', artist: 'Tiesto'},
-  {name: 'Zocalo', artist: 'Armin van buuren'},
-  {name: 'For an angels', artist: 'Paul van dyk'},
-  {name: 'How do i know', artist: 'Andrew rayel'},
+
 ]
 export default {
   name: 'app',
@@ -65,7 +63,11 @@ export default {
 
   methods: {
     search () {
-      return this.tracks = tracks
+      if (!this.searchQuery) {return }
+      trackService.search(this.searchQuery)
+        .then(res => {
+          return this.tracks = res.tracks.items
+        })
     }
   }
 }
