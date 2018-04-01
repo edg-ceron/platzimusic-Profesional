@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div v-if="track && track.album"class="card">
     <div class="card-image">
       <figure class="image is-1by1">
         <img :src="track.album.images[0].url">
@@ -30,6 +30,9 @@
             <a class="level-item">
               <span @click="selectTrack" class="icon is-small"> ▶ </span>
             </a>
+            <a class="level-item">
+              <span @click="goToTrack(track.id)" class="icon is-small"> 👁 </span>
+            </a>
           </div>
         </nav>
       </div>
@@ -39,7 +42,7 @@
 
 <script>
 export default {
-  name: 'track',
+  name: 'trackList',
   props: {
     track: {type: Object, requiered: true}
   },
@@ -51,6 +54,9 @@ export default {
       this.$emit('select', this.track.id)
 
       this.$bus.$emit('set-track', this.track)
+    },
+    goToTrack (id) {
+      this.$router.push({name: 'track', params: {id}})
     }
   }
 }
