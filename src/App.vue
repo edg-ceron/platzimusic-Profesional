@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <section class="section">
+    <Loader v-show="isLoading"/>
+    <section v-show="!isLoading" class="section">
       <nav class="nav has-shadow">
         <div class="columns is-gapless is-mobile">
           <div class="column is-9">
@@ -21,13 +22,16 @@
         </div>
       </nav>
       <small class="has-text-grey-lighter">{{searchMessage}}</small>
-      <div class="column">
-        <div v-for="t in tracks">
-          {{t.name}} - {{t.artists[0].name}}
+      <div class="container results">
+        <div class="columns is-multiline">
+          <div v-for="t in tracks" class="column is-one-quarter">
+            <Track :track="t"/>
+            {{t.name}} - {{t.artists[0].name}}
+          </div>
         </div>
       </div>
     </section>
-    <br>
+
     <section class="section">
       <ManipulacionDom />
     </section>
@@ -35,16 +39,20 @@
     <section class="section">
       <Reactividad />
     </section>
+
     <Footer />
+
   </div>
 </template>
 
 <script>
-import ManipulacionDom from './views/manipularDom'
-import Footer from './components/layout/footer'
-import Header from './components/layout/header'
+import ManipulacionDom from '@/views/manipularDom'
+import Reactividad from '@/practicas/reactividad'
 
-import Reactividad from './practicas/reactividad'
+import Footer from '@/components/layout/footer'
+import Header from '@/components/layout/header'
+import Track from '@/components/track'
+import Loader from '@/components/shared/loaded'
 
 import trackService from './services/track'
 
@@ -58,13 +66,16 @@ export default {
     ManipulacionDom,
     Footer,
     Header,
-    Reactividad
+    Reactividad,
+    Track,
+    Loader
   },
 
   data () {
     return {
       searchQuery: '',
-      tracks: []
+      tracks: [],
+      isLoading: false
     }
   },
 
@@ -77,8 +88,10 @@ export default {
   methods: {
     search () {
       if (!this.searchQuery) {return }
+      this.isLoading = true
       trackService.search(this.searchQuery)
         .then(res => {
+          this.isLoading = false
           return this.tracks = res.tracks.items
         })
     }

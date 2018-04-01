@@ -17,6 +17,16 @@ export default {
     }
   },
 
+  created () {
+    // Para hacer peticiones http o a api-rest
+    console.log('created ...')
+  },
+
+  mounted () {
+    // Cuando ya esta montando en el Dom y ya puedo acceder a elementos html
+    console.log('mounted ....')
+  },
+
   methods: {
     addProp () {
       // this.$set(this.person, 'lastName', 'Ceron')
