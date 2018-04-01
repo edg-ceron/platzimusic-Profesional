@@ -7,11 +7,12 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .content {
   padding: 20px;
   min-height: 40vh;
 }
+
 .loader,
 .loader:before,
 .loader:after {

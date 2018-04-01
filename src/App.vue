@@ -25,7 +25,7 @@
       <div class="container results">
         <div class="columns is-multiline">
           <div v-for="t in tracks" class="column is-one-quarter">
-            <Track :track="t" @select="setSelectedTrack"/>
+            <Track :track="t" @select="setSelectedTrack" :class="{'is-active': t.id === selectedTrack}"/>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default {
 
       isLoading: false,
 
-      selectedtrack: ''
+      selectedTrack: ''
     }
   },
 
@@ -105,5 +105,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import './scss/main.scss'
+@import './scss/main.scss';
+
+.is-active{
+  border: 3px #ff3860 solid;
+}
 </style>

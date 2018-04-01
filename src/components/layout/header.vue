@@ -5,7 +5,6 @@
         <div class="container">
           <div class="nav-left">
             <div class="nav-item">
-              <strong>Platzi Music</strong>
             </div>
           </div>
           <div class="nav-right nav-menu">
