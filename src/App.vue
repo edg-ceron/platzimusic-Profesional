@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <Header />
+    <Notification v-show="showNotification">
+      <p slot="body">No se encontraron resultados</p>
+    </Notification>
     <Loader v-show="isLoading"/>
     <section v-show="!isLoading" class="section">
       <nav class="nav has-shadow">
@@ -39,6 +42,12 @@
       <Reactividad />
     </section>
 
+    <section class="section">
+      <Child>
+        <h1 slot="title">Titulo Slot</h1>
+      </Child>
+    </section>
+
     <Footer />
 
   </div>
@@ -47,11 +56,13 @@
 <script>
 import ManipulacionDom from '@/views/manipularDom'
 import Reactividad from '@/practicas/reactividad'
+import Child from '@/practicas/childComponent'
 
 import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/header'
 import Track from '@/components/track'
 import Loader from '@/components/shared/loaded'
+import Notification from '@/components/shared/notification.vue'
 
 import trackService from './services/track'
 
@@ -67,7 +78,9 @@ export default {
     Header,
     Reactividad,
     Track,
-    Loader
+    Loader,
+    Child,
+    Notification
   },
 
   data () {
@@ -76,6 +89,7 @@ export default {
       tracks: [],
 
       isLoading: false,
+      showNotification: false,
 
       selectedTrack: ''
     }
@@ -93,9 +107,11 @@ export default {
       this.isLoading = true
       trackService.search(this.searchQuery)
         .then(res => {
+          this.showNotification = res.tracks.total === 0
           this.isLoading = false
           return this.tracks = res.tracks.items
         })
+
     },
     setSelectedTrack (id) {
       this.selectedTrack = id
