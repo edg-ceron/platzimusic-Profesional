@@ -101,6 +101,16 @@ export default {
     }
   },
 
+  watch: {
+    showNotification () {
+      if (this.showNotification){
+        setTimeout( ()=> {
+          this.showNotification = false
+        }, 3000)
+      }
+    }
+  },
+
   methods: {
     search () {
       if (!this.searchQuery) {return }
