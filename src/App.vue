@@ -97,7 +97,7 @@ export default {
 
   computed: {
     searchMessage () {
-      return ` Entrados: ${this.tracks.length}`
+      return ` Encontrados: ${this.tracks.length}`
     }
   },
 
