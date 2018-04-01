@@ -15,7 +15,7 @@
               placeholder="Buscar canciones"
               @keyup.enter="search"
             >
-            <!-- @keyup.enter  PAra no dar directamente  en el boton si no con un enter-->
+            <!-- @keyup.enter  Para no dar directamente  en el boton si no con un enter-->
           </div>
           <div class="column">
             <a @click="search" class="button is-info is-large">Buscar</a>
